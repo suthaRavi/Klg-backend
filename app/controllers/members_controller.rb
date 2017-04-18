@@ -1,9 +1,10 @@
 class MembersController < ApplicationController
+  #before_action :authenticate_user!
   before_action :set_member, only: [:show, :update, :destroy]
-
+  
   # GET /members
   def index
-    @members = Member.all
+    @members = Member.all.order(:id)
 
     render json: @members
   end
