@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :statuses
   resources :fulltimes
   resources :roles
   resources :departments
