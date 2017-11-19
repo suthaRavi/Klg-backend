@@ -46,6 +46,6 @@ class StatusesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def status_params
-      params.require(:status).permit(:value, :name)
+      params.require(:status).permit(:code, :name)
     end
 end

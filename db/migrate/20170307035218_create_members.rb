@@ -4,14 +4,14 @@ class CreateMembers < ActiveRecord::Migration[5.0]
       t.string :member_id
       t.string :first_name
       t.string :last_name
-      t.integer :department
-      t.integer :role
+      t.string :department
+      t.string :role
       t.string :reporting_id
       t.date :join_date
       t.date :end_date
-      t.integer :full_time
+      t.string :category
       t.float :pay_rate
-      t.integer :status
+      t.string :status
       t.timestamps
     end
   end

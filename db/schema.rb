@@ -10,21 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171112232521) do
+ActiveRecord::Schema.define(version: 20171117034448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "departments", force: :cascade do |t|
+  create_table "categories", force: :cascade do |t|
+    t.string   "code"
     t.string   "name"
-    t.integer  "serial"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "fulltimes", force: :cascade do |t|
-    t.integer  "value"
+  create_table "departments", force: :cascade do |t|
     t.string   "name"
+    t.string   "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -33,27 +33,27 @@ ActiveRecord::Schema.define(version: 20171112232521) do
     t.string   "member_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "department"
-    t.integer  "role"
+    t.string   "department"
+    t.string   "role"
     t.string   "reporting_id"
     t.date     "join_date"
     t.date     "end_date"
-    t.integer  "full_time"
+    t.string   "category"
     t.float    "pay_rate"
-    t.integer  "status"
+    t.string   "status"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
-    t.integer  "serial"
+    t.string   "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "statuses", force: :cascade do |t|
-    t.integer  "value"
+    t.string   "code"
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

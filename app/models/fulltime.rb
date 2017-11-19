@@ -1,2 +1,0 @@
-class Fulltime < ApplicationRecord
-end

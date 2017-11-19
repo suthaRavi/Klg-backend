@@ -3,7 +3,7 @@ class RolesController < ApplicationController
 
   # GET /roles
   def index
-    @roles = Role.all.order(:serial)
+    @roles = Role.all.order(:id)
 
     render json: @roles
   end
@@ -46,6 +46,6 @@ class RolesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def role_params
-      params.require(:role).permit(:name, :serial)
+      params.require(:role).permit(:name, :code)
     end
 end
