@@ -16,57 +16,57 @@ ActiveRecord::Schema.define(version: 20171120021837) do
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
-    t.string   "code"
-    t.string   "name"
+    t.string   "code",       null: false
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "customers", force: :cascade do |t|
-    t.string   "customer_id"
-    t.string   "name"
-    t.string   "address1"
+    t.string   "customer_id", null: false
+    t.string   "name",        null: false
+    t.string   "address1",    null: false
     t.string   "address2"
-    t.string   "city"
-    t.string   "zipCode"
-    t.string   "country"
+    t.string   "city",        null: false
+    t.string   "zipCode",     null: false
+    t.string   "country",     null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
   create_table "departments", force: :cascade do |t|
-    t.string   "name"
-    t.string   "code"
+    t.string   "name",       null: false
+    t.string   "code",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "members", force: :cascade do |t|
-    t.string   "member_id"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "department"
-    t.string   "role"
-    t.string   "reporting_id"
-    t.date     "join_date"
+    t.string   "member_id",    null: false
+    t.string   "first_name",   null: false
+    t.string   "last_name",    null: false
+    t.string   "department",   null: false
+    t.string   "role",         null: false
+    t.string   "reporting_id", null: false
+    t.date     "join_date",    null: false
     t.date     "end_date"
-    t.string   "category"
-    t.float    "pay_rate"
-    t.string   "status"
+    t.string   "category",     null: false
+    t.float    "pay_rate",     null: false
+    t.string   "status",       null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string   "name"
-    t.string   "code"
+    t.string   "name",       null: false
+    t.string   "code",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "statuses", force: :cascade do |t|
-    t.string   "code"
-    t.string   "name"
+    t.string   "code",       null: false
+    t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
