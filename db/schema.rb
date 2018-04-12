@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171231204646) do
+ActiveRecord::Schema.define(version: 20180410022519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,9 @@ ActiveRecord::Schema.define(version: 20171231204646) do
     t.string   "country",     null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "state"
+    t.string   "phone"
+    t.string   "fax"
   end
 
   create_table "departments", force: :cascade do |t|
@@ -39,6 +42,25 @@ ActiveRecord::Schema.define(version: 20171231204646) do
     t.string   "code",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "job_categories", force: :cascade do |t|
+    t.string   "code"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "job_times", force: :cascade do |t|
+    t.integer  "time_sheet_id"
+    t.string   "job_id"
+    t.string   "job_department"
+    t.string   "job_category"
+    t.float    "job_time"
+    t.boolean  "is_overtime"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["time_sheet_id"], name: "index_job_times_on_time_sheet_id", using: :btree
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -53,6 +75,7 @@ ActiveRecord::Schema.define(version: 20171231204646) do
     t.string   "previousjob_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "customer_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -81,6 +104,13 @@ ActiveRecord::Schema.define(version: 20171231204646) do
   create_table "statuses", force: :cascade do |t|
     t.string   "code",       null: false
     t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "time_sheets", force: :cascade do |t|
+    t.string   "first_name"
+    t.date     "job_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

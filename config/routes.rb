@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :job_times
+  resources :time_sheets
+  resources :job_categories
   resources :jobs
   resources :customers
   resources :categories
