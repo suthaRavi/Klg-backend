@@ -46,6 +46,6 @@ class JobTimesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def job_time_params
-      params.require(:job_time).permit(:job_id, :job_department, :job_category)
+      params.require(:job_time).permit(:job_id, :job_department, :job_category, :job_time, :is_overtime)
     end
 end
