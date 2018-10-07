@@ -1,15 +1,27 @@
 class TimeSheetsController < ApplicationController
+  
   before_action :set_time_sheet, only: [:show, :update, :destroy]
-
-  # wrap_parameters format: [:json, :xml, :url_encoded_form, :multipart_form]  
- #  wrap_parameters  include: [:job_id, :job_department, :job_category, :job_time, :is_overtime]
-
-    
+     
   # GET /time_sheets
   def index
-    @time_sheets = TimeSheet.all
+   # @time_sheets = TimeSheet.all
+    if (params[:job_date] && params[:first_name])    
+        @time_sheets = TimeSheet.where("first_name = ? AND job_date = ?",params[:first_name], params[:job_date])
+    else
 
-    render json: @time_sheets
+      @time_sheets = TimeSheet.all
+    end  
+      
+  
+      #  @time_sheets = if params[:first_name]  
+      #       TimeSheet.joins(:job_times).where("first_name = ? AND job_date = ? AND job_times.job_id = ? ",  params[:first_name], params[:job_date], params[:job_id])    
+              
+      #    else
+      #    @time_sheets = TimeSheet.all
+      #   end
+    render json: @time_sheets.to_json(
+      :include => :job_times  
+    )
   end
 
   # GET /time_sheets/1
@@ -19,24 +31,8 @@ class TimeSheetsController < ApplicationController
 
   # POST /time_sheets
   def create
-   # @time_sheet = TimeSheet.new(time_sheet_params)
-   #puts "Job time  #{params.dig(:job_times)}"
-    #jobtime = [{job_id: '1234', job_department: 'CNC'} ]
-     #  job_times_attributes = time_sheet_params.delete("job_times")
-   # puts "JOb #{job_times_attributes}"
-    @time_sheet = TimeSheet.create!(time_sheet_params)
     
- 
-    #@time_sheet.job_times = job_times_attributes.map{ |j| Job_time.new(j)}
-    @time_sheet.job_times.build()
-   # @time_sheet.job_times = JobTimes.new(job_times_params)
-   
-   # @time_sheet.job_times.new(jobtime)
-   
-    puts" **** #{@time_sheet.first_name}"
-   puts"Params #{params[:job_times]}"
-  #  puts "Time Sheet Params #{params[0].values}    "
-   # puts"JOB TIME #{@time_sheet.job_times.job_id}"
+    @time_sheet = TimeSheet.create!(time_sheet_params)    
     
     if @time_sheet.save
       render json: @time_sheet, status: :created, location: @time_sheet
@@ -59,6 +55,10 @@ class TimeSheetsController < ApplicationController
     @time_sheet.destroy
   end
 
+  def search
+
+  end
+
   private
   
 
@@ -70,9 +70,9 @@ class TimeSheetsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def time_sheet_params
       
-     #params[:time_sheet][:job_times] = params[:job_times]
+     params[:time_sheet][:job_times_attributes] = params[:job_times_attributes]
      
-      params.require(:time_sheet).permit(:first_name, :job_date, :job_times => [:id, :job_id, :job_department, :job_category, :job_time, :is_overtime  ]) 
-      
+      params.require(:time_sheet).permit(:first_name, :job_date, :end_date, job_times_attributes: [:job_id, :job_department, :job_category, :job_time, :is_overtime ]) 
+     
     end
 end
