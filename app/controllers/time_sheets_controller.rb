@@ -43,7 +43,21 @@ class TimeSheetsController < ApplicationController
 
   # PATCH/PUT /time_sheets/1
   def update
+    logger.debug("Time sheet ID &&: #{params[:id]}")
+    timeSheet = TimeSheet.find(params[:id]) 
+    #timeSheet.destroy
+    #@time_sheet = TimeSheet.create!(time_sheet_params) 
+      #  jobTimes = timeSheet.job_times
+      #  logger.debug "Time sheet***:  #{params[:job_times_attributes]}"
+       # jobTimes.destroy_all()
+   # logger.debug("@time sheet *****: #{@time_sheet}")
+   # newJobTimes = params[:job_times_attributes]
+   # logger.debug("### new job times : #{newJobTimes}")
+   # @time_sheet.job_times.build(newJobTimes)
     if @time_sheet.update(time_sheet_params)
+  # if @time_sheet.save
+    logger.debug("Time sheet saved")
+     # logger.debug "***Job Times: #{params[:time_sheet][:job_times_attributes]}"
       render json: @time_sheet
     else
       render json: @time_sheet.errors, status: :unprocessable_entity
@@ -58,6 +72,10 @@ class TimeSheetsController < ApplicationController
   def search
 
   end
+  def getJobTime
+    
+  end
+
 
   private
   
@@ -72,7 +90,9 @@ class TimeSheetsController < ApplicationController
       
      params[:time_sheet][:job_times_attributes] = params[:job_times_attributes]
      
-      params.require(:time_sheet).permit(:first_name, :job_date, :end_date, job_times_attributes: [:job_id, :job_department, :job_category, :job_time, :is_overtime ]) 
+      params.require(:time_sheet).permit(:first_name, :job_date, :end_date, 
+      job_times_attributes: [:id, :time_sheet_id, :job_id, :job_department,
+       :job_category, :job_time, :is_overtime, :created_at, :updated_at, :_destroy  ]) 
      
     end
 end

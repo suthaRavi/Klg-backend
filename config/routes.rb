@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :currency_masters
+  resources :job_statuses
   resources :job_times
   resources :time_sheets
   resources :job_categories

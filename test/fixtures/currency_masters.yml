@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  currency_id: MyString
+  currency_code: MyString
+  currency_description: MyString
+  is_default_currency: false
+  currency_image_url: MyString
+  currency_status: MyString
+
+two:
+  currency_id: MyString
+  currency_code: MyString
+  currency_description: MyString
+  is_default_currency: false
+  currency_image_url: MyString
+  currency_status: MyString

@@ -1,0 +1,2 @@
+class CurrencyMaster < ApplicationRecord
+end

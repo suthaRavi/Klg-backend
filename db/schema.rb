@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180410022519) do
+ActiveRecord::Schema.define(version: 20181209120905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,19 +22,30 @@ ActiveRecord::Schema.define(version: 20180410022519) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "currency_masters", force: :cascade do |t|
+    t.string   "currency_id"
+    t.string   "currency_code"
+    t.string   "currency_description"
+    t.boolean  "is_default_currency",  default: false
+    t.string   "currency_image_url"
+    t.string   "currency_status"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string   "customer_id", null: false
     t.string   "name",        null: false
     t.string   "address1",    null: false
-    t.string   "address2"
+    t.string   "address2",    null: false
     t.string   "city",        null: false
     t.string   "zipCode",     null: false
     t.string   "country",     null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "state"
-    t.string   "phone"
-    t.string   "fax"
+    t.string   "state",       null: false
+    t.string   "phone",       null: false
+    t.string   "fax",         null: false
   end
 
   create_table "departments", force: :cascade do |t|
@@ -45,6 +56,13 @@ ActiveRecord::Schema.define(version: 20180410022519) do
   end
 
   create_table "job_categories", force: :cascade do |t|
+    t.string   "code",       null: false
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "job_statuses", force: :cascade do |t|
     t.string   "code"
     t.string   "name"
     t.datetime "created_at", null: false
@@ -53,13 +71,13 @@ ActiveRecord::Schema.define(version: 20180410022519) do
 
   create_table "job_times", force: :cascade do |t|
     t.integer  "time_sheet_id"
-    t.string   "job_id"
-    t.string   "job_department"
-    t.string   "job_category"
-    t.float    "job_time"
-    t.boolean  "is_overtime"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "job_id",                         null: false
+    t.string   "job_department",                 null: false
+    t.string   "job_category",                   null: false
+    t.float    "job_time",                       null: false
+    t.boolean  "is_overtime",    default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.index ["time_sheet_id"], name: "index_job_times_on_time_sheet_id", using: :btree
   end
 
@@ -75,7 +93,7 @@ ActiveRecord::Schema.define(version: 20180410022519) do
     t.string   "previousjob_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.string   "customer_id"
+    t.string   "customer_id",    null: false
   end
 
   create_table "members", force: :cascade do |t|
@@ -109,8 +127,8 @@ ActiveRecord::Schema.define(version: 20180410022519) do
   end
 
   create_table "time_sheets", force: :cascade do |t|
-    t.string   "first_name"
-    t.date     "job_date"
+    t.string   "first_name", null: false
+    t.date     "job_date",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

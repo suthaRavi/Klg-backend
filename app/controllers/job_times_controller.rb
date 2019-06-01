@@ -3,7 +3,10 @@ class JobTimesController < ApplicationController
 
   # GET /job_times
   def index
-    @job_times = JobTime.all
+    if(params[:job_id])
+      @job_times = JobTime.where("job_id = ?", params[:job_id])
+    end
+    logger.debug "Job times #{@job_times}"
 
     render json: @job_times
   end
