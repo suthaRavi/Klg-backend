@@ -1,6 +1,6 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  config.action_mailer.default_url_options = { :host => "localhost:4200" }
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -56,7 +56,7 @@ Rails.application.configure do
   :port => 587,
   :domain => "gmail.com",
   :user_name => "ravivendan@gmail.com",
-  :password => "vendan1sutha",
+  :password => "vendan2sutha",
   :authentication => 'plain',
   :enable_starttls_auto => true
 }
