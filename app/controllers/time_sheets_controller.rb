@@ -7,9 +7,24 @@ class TimeSheetsController < ApplicationController
    # @time_sheets = TimeSheet.all
     if (params[:job_date] && params[:first_name])    
         @time_sheets = TimeSheet.where("first_name = ? AND job_date = ?",params[:first_name], params[:job_date])
-    else
+    elsif (params[:job_date] && params[:job_id]) 
+      logger.debug "Job Date:  #{params[:job_date]} "
+      ts = TimeSheet.joins(:job_times).where("job_date = ? AND job_times.job_id = ? ",  params[:job_date], params[:job_id]) 
+      ts.each do |jt|
+        puts "job time #{jt.job_times.inspect}"
+        jts = jt.job_times.reject{|hash| hash[:job_id]  != params[:job_id]}
+        puts " After #{jts.inspect}"
+        jt.job_times = jts
+        
+       jt.job_times.each do |jobTime|
+         # puts "Job Id #{jobTime.job_id}"
+          #jt.job_times.reject{|jobTime.job_id|jobTime.job_id != params[:job_id]}
+         # puts "job time length after #{jt.job_times.length}"
+        end
 
-      @time_sheets = TimeSheet.all
+      end
+     # logger.debug " Job Times #{ts[0].job_times.length}"
+      @time_sheets = ts
     end  
       
   
@@ -72,7 +87,8 @@ class TimeSheetsController < ApplicationController
   def search
 
   end
-  def getJobTime
+  def getJobTimeByDateByJobId
+    logger.debug("Get Job time by Date and Job id ")
     
   end
 
