@@ -52,16 +52,16 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.smtp_settings = {
   :address => "smtp.gmail.com",
-  #:address => "smtp.live.com",
+ # :address => "smtp.live.com",
   :port => 587,
   :domain => "gmail.com",
-  #:domain => "mail.live.com",
+ # :domain => "mail.live.com",
   :user_name => "ravivendan@gmail.com",
-  :password => "vendan32Sutha",
-  #:user_name => "ravivendan@hotmail.com",
-  #:password => "canaRavi1",
+  :password => "vendan1Sutha",
+ # :user_name => "ravivendan@hotmail.com",
+ # :password => "canaRavi1",
   :authentication => 'plain',
-  #:enable_starttls_auto => true
+  :enable_starttls_auto => true
 }
   
 end

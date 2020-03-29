@@ -5,6 +5,9 @@ class JobTimesController < ApplicationController
   def index
     if(params[:job_id])
       @job_times = JobTime.where("job_id = ?", params[:job_id])
+      logger.debug "Job times with status  #{@job_times}"
+    else
+      @job_times = JobTime.all
     end
     logger.debug "Job times #{@job_times}"
 
